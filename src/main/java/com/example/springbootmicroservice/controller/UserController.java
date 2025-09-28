@@ -2,6 +2,7 @@ package com.example.springbootmicroservice.controller;
 
 import com.example.springbootmicroservice.model.User;
 import com.example.springbootmicroservice.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,13 +26,13 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> createUser(@RequestBody User user) {
+    public ResponseEntity<Void> createUser(@Valid @RequestBody User user) {
         userService.createUser(user);
         return ResponseEntity.ok().build();
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Void> updateUser(@PathVariable Long id, @RequestBody User user) {
+    public ResponseEntity<Void> updateUser(@PathVariable Long id, @Valid @RequestBody User user) {
         user.setId(id);
         userService.updateUser(user);
         return ResponseEntity.ok().build();
